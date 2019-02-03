@@ -1,0 +1,33 @@
+Shortkeys list execute once, default delay=100ms. Read below to get more information about each function.
+Important! Make sure that item id is valid.
+
+say exura 		- Say text on Default channel.
+exivat			- Exiva current target or last attacked player.
+ring 2167		- Equip itemid to ring slot.
+amulet 2316		- Equip itemid to amulet slot.
+tuse 2268		- Use item with attacked creature.
+meuse 2273		- Use item with me.
+use 2789		- Use object id.
+withuse 2293		- Use item with crosshairs. [Not avaiable on otclient]
+turn 0			- Turn your character to the north [0=N, 1=E, 2=S, 3=W, 4=NE, 5=SE, 6=SW, 7=NW].
+step 0			- Step to direction [see above].
+uh Ben, 2273		- Use item id: 2273 on Player name: Ben.
+ering			- Load energy ring.
+sdlast			- Shoot SD with last target.
+runelast 3198		- Use item id: 3198 with last attacked creature.
+paralast		- Paralyze last target.
+mwtarget		- Keep magic wall with target position.
+mousedrop 2148		- Drop item id under mouse cursor
+antipush 2148, 2789	- Drop two different items under you with quantity 2.
+mf			- Use mana fluid only when mana not fully.
+lifefluid		- Use life fluid when hp not fully. You can use also "lf"
+uh			- Use UH only when hp not fully.
+wear 3031, 5		- Wear item id to equipment slot: 0 - head, 1 - backpack, 2 - amulet, 3 - armor , 4 - shield, 5 - weapon, 6 - legs, 7 - feet, 8 - ring, 9 - arrow.
+execute scriptName	- Press one = Load script to running in Scripter. Press two kill script from running scripts.
+
+Additional shortkeys, set key what you want with this squence: 0x70;command or 0x70+0x10;command where multiple ctrl is 0x11 and shift is 0x10
+Full list of keys available here: http://www.kbdedit.com/manual/low_level_vk_list.html
+
+0x23;<empty>
+0x11+0x70;execute Auto SSA
+0x2E;<empty>

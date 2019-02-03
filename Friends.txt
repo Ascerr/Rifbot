@@ -1,0 +1,3 @@
+Friends list, one name per line.
+Friend1
+Friend2
