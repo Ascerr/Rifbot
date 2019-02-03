@@ -1,4 +1,5 @@
 All informations about Rifbot available here: https://www.rifbot.eu/
+
 Below most known problems and how to fix it.
 
 -------------------------------------------------------------------------------------------------------------
