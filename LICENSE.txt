@@ -1,0 +1,24 @@
+Rifbot for Tibia 7.4
+Version 1.4.2, build #2019-01-26
+Copyright (c) Rifbot 2019
+
+1. System
+Program support only Microsoft Windows operating system.
+
+2. Registration
+Short after finish installation you will need to enter serial number allows you to using software. Other way just hit button Buy to get a new license key.
+
+3. Compatibile
+Program support basic TibiaClient and Otclient. Current tested servers: Mastercores.com, Realesta74.net, Medivia.online, Nostalrius.com, Classictibia.com, WeAreTibia.com, Waropolis.net
+
+4. Bugs
+Rifbot is advanced software that support many servers. In this fact some functions may don't work. Please contact with developer to fix this issue: rafalchabros1@gmail.com 
+
+5. Lua Scripts
+As user you are able to create custom lua scripts and sell them to other players. Please remember that I as developer don't have to write a custom lua script but I could write it for you.
+
+6. Infection.
+To protect source code before reverse engineering Rifbot has a new uknown for Antivitus programs algorithm. All pseudo vir are just False positive.
+
+7. Privacy
+Software do not create hidden registry files complicated to remove.
