@@ -1,5 +1,4 @@
 Rifbot for Tibia 7.4
-Version 1.4.2, build #2019-01-26
 Copyright (c) Rifbot 2019
 
 1. System
