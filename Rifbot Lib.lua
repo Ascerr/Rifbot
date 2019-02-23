@@ -1,4 +1,4 @@
-RIFBOT_VERSION = "1.43"
+RIFBOT_VERSION = "1.44"
 
 --[[
 	RifbotLuaLib
@@ -936,27 +936,30 @@ end
 -->					@direction - number 0-7 or NORTH, EAST etc.
 --> Return: 		table {x = ?, y = ?, z = ?}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Self.getPositionFromDirection(direction)
+function Self.getPositionFromDirection(direction, len)
 	local self = Self.Position()
 	if self.x == 0 then
 		return {x = 0, y = 0, z = 0}
+	end
+	if len == 0 or len == nil then
+		len = 1
 	end	
 	if direction == 0 then
-		return {x = self.x, y = self.y - 1, z = self.z}
+		return {x = self.x, y = self.y - len, z = self.z}
 	elseif direction == 1 then
-		return {x = self.x + 1, y = self.y, z = self.z}
+		return {x = self.x + len, y = self.y, z = self.z}
 	elseif direction == 2 then
-		return {x = self.x, y = self.y + 1, z = self.z}
+		return {x = self.x, y = self.y + len, z = self.z}
 	elseif direction == 3 then
-		return {x = self.x - 1, y = self.y, z = self.z}	
+		return {x = self.x - len, y = self.y, z = self.z}	
 	elseif direction == 4 then
-		return {x = self.x + 1, y = self.y - 1, z = self.z}	
+		return {x = self.x + len, y = self.y - len, z = self.z}	
 	elseif direction == 5 then
-		return {x = self.x + 1, y = self.y + 1, z = self.z}	
+		return {x = self.x + len, y = self.y + len, z = self.z}	
 	elseif direction == 6 then
-		return {x = self.x - 1, y = self.y + 1, z = self.z}	
+		return {x = self.x - len, y = self.y + len, z = self.z}	
 	elseif direction == 7 then
-		return {x = self.x - 1, y = self.y - 1, z = self.z}			
+		return {x = self.x - len, y = self.y - len, z = self.z}			
 	else
 		return {x = self.x, y = self.y, z = self.z}
 	end		
@@ -966,30 +969,32 @@ end
 --> Function:		Self.getDirectionFromPosition(x, y, z)
 --> Description: 	Get direction from pos x, y, z.
 --> Class: 			Self
---> Params:			
---> Params:			
+--> Params:				
 -->					@x coordinate in the map on the x-axis
 -->					@y coordinate in the map on the y-axis
 -->					@z coordinate in the map on the z-axis
 --> Return: 		number
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Self.getDirectionFromPosition(x, y, z) 
+function Self.getDirectionFromPosition(x, y, z, len) 
 	local self = Self.Position()
-	if self.x == x and self.y - 1 == y then
+	if len == 0 or len == nil then
+		len = 1
+	end	
+	if self.x == x and self.y - len == y then
 		return 0
-	elseif self.x + 1 == x and self.y == y then
+	elseif self.x + len == x and self.y == y then
 		return 1
-	elseif self.x == x and self.y + 1 == y then
+	elseif self.x == x and self.y + len == y then
 		return 2
-	elseif self.x - 1 == x and self.y == y then
+	elseif self.x - len == x and self.y == y then
 		return 3
-	elseif self.x + 1 == x and self.y - 1 == y then
+	elseif self.x + len == x and self.y - len == y then
 		return 4
-	elseif self.x + 1 == x and self.y + 1 == y then
+	elseif self.x + len == x and self.y + len == y then
 		return 5
-	elseif self.x - 1 == x and self.y + 1 == y then
+	elseif self.x - len == x and self.y + len == y then
 		return 6
-	elseif self.x - 1 == x and self.y - 1 == y then
+	elseif self.x - len == x and self.y - len == y then
 		return 7
 	else
 		return 0
@@ -2528,4 +2533,17 @@ function wait(a, b)
 	else
 		sleep(math.random(a, b))
 	end		
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		classicTibiaRelogin()
+--> Description: 	Reconnect to game on TibiaClient where we need to put acc na passwd before press enter. This function will not work if you dont login
+-->					any character before start Rifbot.
+-->
+--> Class: 			Misc
+--> Params:			None
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function classicTibiaRelogin()
+	return classicTibiaReconnect()
 end
