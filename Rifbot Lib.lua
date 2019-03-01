@@ -1,4 +1,4 @@
-RIFBOT_VERSION = "1.45"
+RIFBOT_VERSION = "1.46"
 
 --[[
 	RifbotLuaLib
