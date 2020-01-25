@@ -29,5 +29,5 @@ Additional shortkeys, set key what you want with this squence: 0x70;command or 0
 Full list of keys available here: http://www.kbdedit.com/manual/low_level_vk_list.html
 
 0x23;<empty>
-0x11+0x70;execute Auto SSA
+0x11+0x70;<empty>
 0x2E;<empty>
