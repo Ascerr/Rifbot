@@ -1,4 +1,4 @@
-RIFBOT_VERSION = "1.56"
+RIFBOT_VERSION = "1.60"
 
 --[[
 	RifbotLuaLib
@@ -277,9 +277,26 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Rifbot.PressKey(key, delay)
 	if delay == nil then 
-		retn = math.random(200, 400) 
+		delay = math.random(200, 400) 
 	end
 	return pressKey(key, delay)	 
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.MouseClick(x, y, side)
+--> Description: 	Click mouse to game client in background. 
+--> Class: 			Rifbot
+--> Params:
+-->					@x - number position x on game client.
+-->					@y - number position y on game client.
+-->					@side - number 0 = left mouse, 1 = right mouse.
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.MouseClick(x, y, side)
+	if side == nil then 
+		side = 0
+	end
+	return mouseClick(x, y, side)	 
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
