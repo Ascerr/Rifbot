@@ -1,4 +1,4 @@
-RIFBOT_VERSION = "1.61"
+RIFBOT_VERSION = "1.62"
 
 --[[
 	RifbotLuaLib
@@ -16,7 +16,7 @@ RIFBOT_VERSION = "1.61"
 ]]
 
 --> Note: 
--->		1. To print boolean with string you have to use additional print("print boolean: " .. tostring(true))
+-->		1. To print boolean with string you have to use additional printf("print boolean: " .. tostring(true))
 
 --> Alarms files from Rifbot\Alarms
 RIFBOT_SOUNDS = {
@@ -102,6 +102,13 @@ PARTY_LEADER_INVITING = 1
 PARTY_MEMBER_INVITED = 2
 PARTY_MEMBER = 3
 PARTY_LEADER = 4
+
+--> Skull types
+SKULL_NONE = 0
+SKULL_YELLOW = 1
+SKULL_GREEN = 2
+SKULL_WHITE = 3
+SKULL_RED = 4
 
 --> Fluids *Old tibia store fluids as one id and count is flag to "mana", "fluid" etc.
 MANA_FLUID = {id = 2874, count = 7}
@@ -946,11 +953,12 @@ function Self.CanCastSpell(spell)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Self.getPositionFromDirection(direction)
+--> Function:		Self.getPositionFromDirection(direction, len)
 --> Description: 	Get position {x, y, z} from direction.
 --> Class: 			Self
 --> Params:			
 -->					@direction - number 0-7 or NORTH, EAST etc.
+-->					@len - number distance betweeen self and reach position.
 --> Return: 		table {x = ?, y = ?, z = ?}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.getPositionFromDirection(direction, len)
@@ -983,13 +991,14 @@ function Self.getPositionFromDirection(direction, len)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Self.getDirectionFromPosition(x, y, z)
+--> Function:		Self.getDirectionFromPosition(x, y, z, len)
 --> Description: 	Get direction from pos x, y, z.
 --> Class: 			Self
 --> Params:				
 -->					@x coordinate in the map on the x-axis
 -->					@y coordinate in the map on the y-axis
 -->					@z coordinate in the map on the z-axis
+-->					@len - number distance betweeen self and reach position.
 --> Return: 		number
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.getDirectionFromPosition(x, y, z, len) 
@@ -1722,6 +1731,21 @@ function Creature.isPartyLeader(creature)
 		return false
 	end
 	return creature.party == PARTY_LEADER	
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Creature.isSkull(creature)
+--> Description: 	Check if creature is skulled.
+--> Class: 			Creature
+--> Params:			
+-->					@creature table returned by Creature.getCreatures(special).
+--> Return: 		int SKULL_NONE = 0, SKULL_YELLOW = 1, SKULL_GREEN = 2, SKULL_WHITE = 3, SKULL_RED = 4
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Creature.isSkull(creature)
+	if type(creature) ~= "table" then
+		return false
+	end
+	return creature.skull
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
