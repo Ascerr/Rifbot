@@ -2150,6 +2150,86 @@ function Container.UseItemWithGround(container, slot, itemid, x, y, z, delay)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.UseItemWithContainer(containerFrom, slotFrom, itemidFrom, containerTo, slotTo, itemidTo, delay)
+--> Description: 	Use container slot with item on other container or equipment slot.
+--> Class: 			Container
+--> Params:			
+-->					@containerFrom - number index container from 0-15.
+-->					@slotFrom - number slot container from 0-32.
+-->					@itemidFrom - number item id.
+-->					@containerTo - number index container from 0-15.
+-->					@slotTo - number slot container from 0-32.
+-->					@itemidTo - number item id.
+-->					@delay - number execution delay (default math.random(1000, 1800))
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.UseItemWithContainer(containerFrom, slotFrom, itemidFrom, containerTo, slotTo, itemidTo, delay)
+	if delay == nil then
+		delay = math.random(1000, 1800)
+	end
+	return containerUseItemWithContainer(containerFrom, slotFrom, itemidFrom, containerTo, slotTo, itemidTo, 0, delay)	
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.UseItemWithEquipment(containerFrom, slotFrom, itemidFrom, slotTo, itemidTo, delay)
+--> Description: 	Use container slot with item on other container or equipment slot.
+--> Class: 			Container
+--> Params:			
+-->					@containerFrom - number index container from 0-15.
+-->					@slotFrom - number slot container from 0-32.
+-->					@itemidFrom - number item id.
+-->					@slotTo - number equipment slot 0-9 or SLOT_HEAD etc.
+-->					@itemidTo - number item id.
+-->					@delay - number execution delay (default math.random(1000, 1800))
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.UseItemWithEquipment(containerFrom, slotFrom, itemidFrom, slotTo, itemidTo, delay)
+	if delay == nil then
+		delay = math.random(1000, 1800)
+	end
+	return containerUseItemWithContainer(containerFrom, slotFrom, itemidFrom, slotTo, 0, itemidTo, 1, delay)	
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.UseItemWithEquipmentOnContainer(slotFrom, itemidFrom, containerTo, slotTo, itemidTo, delay)
+--> Description: 	Use container slot with item on other container or equipment slot.
+--> Class: 			Container
+--> Params:			
+-->					@slotFrom - number equipment slot 0-9 or SLOT_HEAD etc.
+-->					@itemidFrom - number item id.
+-->					@containerTo - number index container from 0-15.
+-->					@slotTo - number slot container from 0-32.
+-->					@itemidTo - number item id.
+-->					@delay - number execution delay (default math.random(1000, 1800))
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.UseItemWithEquipmentOnContainer(slotFrom, itemidFrom, containerTo, slotTo, itemidTo, delay)
+	if delay == nil then
+		delay = math.random(1000, 1800)
+	end
+	return containerUseItemWithContainer(slotFrom, 0, itemidFrom, containerTo, slotTo, itemidTo, 2, delay)	
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.UseItemWithEquipmentOnEquipment(slotFrom, itemidFrom, slotTo, itemidTo, delay)
+--> Description: 	Use container slot with item on other container or equipment slot.
+--> Class: 			Container
+--> Params:			
+-->					@slotFrom - number equipment slot 0-9 or SLOT_HEAD etc.
+-->					@itemidFrom - number item id.
+-->					@slotTo - number equipment slot 0-9 or SLOT_HEAD etc.
+-->					@itemidTo - number item id.
+-->					@delay - number execution delay (default math.random(1000, 1800))
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.UseItemWithEquipmentOnEquipment(slotFrom, itemidFrom, slotTo, itemidTo, delay)
+	if delay == nil then
+		delay = math.random(1000, 1800)
+	end
+	return containerUseItemWithContainer(slotFrom, 0, itemidFrom, slotTo, 0, itemidTo, 3, delay)	
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Container.UseItemWithCreature(container, slot, itemid, creature, delay)
 --> Description: 	Use container slot with creature.
 --> Class: 			Container
