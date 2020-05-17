@@ -113,6 +113,9 @@ SKULL_RED = 4
 --> Fluids *Old tibia store fluids as one id and count is flag to "mana", "fluid" etc.
 MANA_FLUID = {id = 2874, count = 7}
 
+--> Friends.txt path
+FRIENDS_PATH = friendsPath
+
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+     						8888888b.  d8b  .d888 888               888         .d8888b.  888                            
@@ -346,6 +349,41 @@ end
 function Rifbot.ScriptIsRunning(script)
 	return scriptIsRunning(script)	 
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.FriendsList()
+--> Description: 	Read Friends.txt file inside Rifbot folder and add all friends to table.
+--> Class: 			Rifbot
+--> Params:			
+-->					@case - boolean true or false lowercase whole table or not default false
+--> Return: 		table with friends.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.FriendsList(case)
+	local friends = {}
+	for line in io.lines(FRIENDS_PATH) do
+		if case then 
+			line = string.lower(line)
+		end	 
+		table.insert(friends, line)
+	end
+	return friends		
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.setCheckboxState(section, checkbox, state)
+--> Description: 	Enable or disable checkbox in Rifbot panel.
+--> Class: 			Rifbot
+--> Params:			
+-->					@section - string Rifbot panel section: healing, friends, runemaker, alarms, skill trainer, tools, pvp area.
+-->					@checkbox - string name of checkbox to on/off e.g. uh, mf, sio, party, player logout, relogin after, hold target, disconnected etc.
+-->					@state - boolean true or false.
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.setCheckboxState(section, checkbox, state)
+	if not section or not checkbox then return false end
+	return setCheckboxState(section, checkbox, state)
+end	
+
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
@@ -1770,6 +1808,7 @@ function Creature.iFunction(group, range, multifloor)
 	end
 	local self = Self.Position()
 	local selfID = Self.ID()
+	local selfName = Self.Name()
 	local distance = {x = 7, y = 5} 
 	if range >= 5 then
 		distance.x = range
@@ -1784,7 +1823,7 @@ function Creature.iFunction(group, range, multifloor)
 		local creature = creatures[i]
 		local varMultifloor = (multifloor == false and self.z == creature.z) or (multifloor == true)
 		local varGroup = (group == "creatures") or (group == "players" and Creature.isPlayer(creature)) or (group == "monsters" and Creature.isMonster(creature)) or (group == "npcs" and Creature.isNpc(creature)) or (group == "party" and (Creature.isPartyLeader(creature) or Creature.isPartyMember(creature)))
-		if creature.id ~= selfID then
+		if creature.id ~= selfID and creature.name ~= selfName then
 			if varMultifloor and varGroup then
 				if (math.abs(creature.x - self.x) <= distance.x and math.abs(creature.y - self.y) <= distance.y) then
 					table.insert(itable, creature)
@@ -2080,7 +2119,7 @@ function Container.getItems(special)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Container.FindItem(itemid)
+--> Function:		Container.FindItem(itemid, special)
 --> Description: 	Search all containers for itemid.
 --> Class: 			Container
 --> Params:			
