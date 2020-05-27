@@ -1,4 +1,4 @@
-RIFBOT_VERSION = "1.64"
+RIFBOT_VERSION = "1.65"
 
 --[[
 	RifbotLuaLib
@@ -351,7 +351,7 @@ function Rifbot.ScriptIsRunning(script)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Rifbot.FriendsList()
+--> Function:		Rifbot.FriendsList(case)
 --> Description: 	Read Friends.txt file inside Rifbot folder and add all friends to table.
 --> Class: 			Rifbot
 --> Params:			
@@ -384,6 +384,16 @@ function Rifbot.setCheckboxState(section, checkbox, state)
 	return setCheckboxState(section, checkbox, state)
 end	
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.GetGroundPosUnderMouse()
+--> Description: 	Get ground position x, y, z under mouse cursor
+--> Class: 			Rifbot
+--> Params:			None
+--> Return: 		table = {x = ?, y = ?, z = ?}.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.GetGroundPosUnderMouse()
+	return getGroundFromMouse()
+end	
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
@@ -1482,7 +1492,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.PickupItem(x, y, z, itemid, count, contNr, contSlot, delay)
---> Description: 	Pickup item from ground to container only for equipment use Self.EquipItemFromGround(x, y, z, slot, itemid, count, delay)
+--> Description: 	Pickup item from ground to container. For equipment use Self.EquipItemFromGround(x, y, z, slot, itemid, count, delay)
 --> Class: 			Self
 --> Params:			
 -->					@x coordinate in the map on the x-axis
@@ -2496,6 +2506,21 @@ function Container.Back(container, delay)
 		delay = math.random(300, 900)
 	end
 	return containerBack(container, delay)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.GetWithEmptySlots(nr)
+--> Description: 	Get container that cointains empty slots
+--> Class: 			Container
+--> Params:			
+-->					@nr - number container index we looking for. It's a optional param.
+--> Return: 		number container index. On failure returns -1.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.GetWithEmptySlots(nr)
+	if nr == nil then
+		nr = -1
+	end
+	return containerGetWithEmptySlots(nr)
 end
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
