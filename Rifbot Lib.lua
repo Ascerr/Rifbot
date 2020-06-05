@@ -1038,17 +1038,6 @@ function Self.getPositionFromDirection(direction, len)
 	end		
 end
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Self.getDirectionFromPosition(x, y, z, len)
---> Description: 	Get direction from pos x, y, z.
---> Class: 			Self
---> Params:				
--->					@x coordinate in the map on the x-axis
--->					@y coordinate in the map on the y-axis
--->					@z coordinate in the map on the z-axis
--->					@len - number distance betweeen self and reach position.
---> Return: 		number
-----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.getDirectionFromPosition(x, y, z, len) 
 	local self = Self.Position()
 	if len == 0 or len == nil then
@@ -1071,6 +1060,28 @@ function Self.getDirectionFromPosition(x, y, z, len)
 	elseif self.x - len == x and self.y - len == y then
 		return 7
 	else
+		if len > 1 then
+			local diffx = math.abs(self.x - x)
+			local diffy = math.abs(self.y - y)
+			local dir = "x"
+			if diffy < diffx then
+				dir = "y"
+			end
+			if dir == "x" then
+				if self.x - x > 0 then
+					return 1
+				else
+					return 3
+				end
+			elseif dir == "y" then
+				if self.y - y > 0 then
+					return 2
+				else
+					return 0
+				end
+			end			 
+		end	
+
 		return 0
 	end	
 end
