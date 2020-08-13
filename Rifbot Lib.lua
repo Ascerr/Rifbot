@@ -1038,6 +1038,17 @@ function Self.getPositionFromDirection(direction, len)
 	end		
 end
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.getDirectionFromPosition(x, y, z, len)
+--> Description: 	Get direction from pos x, y, z.
+--> Class: 			Self
+--> Params:				
+-->					@x coordinate in the map on the x-axis
+-->					@y coordinate in the map on the y-axis
+-->					@z coordinate in the map on the z-axis
+-->					@len - number distance betweeen self and reach position.
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.getDirectionFromPosition(x, y, z, len) 
 	local self = Self.Position()
 	if len == 0 or len == nil then
@@ -2055,14 +2066,15 @@ end
 -->					@y coordinate in the map on the y-axis
 -->					@z coordinate in the map on the z-axis
 -->					@itemid - number item id.
+-->					@stack - number which stack on square to use. 1 or 2 should be top most item.
 -->					@delay - number execution delay (default math.random(350, 1200))
 --> Return: 		boolean true or false		
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Map.UseItem(x, y, z, itemid, delay)
+function Map.UseItem(x, y, z, itemid, stack, delay)
 	if delay == nil then
 		delay = math.random(350, 1200)
 	end	
-	return mapUseItem(x, y, z, itemid, delay)
+	return mapUseItem(x, y, z, itemid, stack, delay)
 end
 
 
