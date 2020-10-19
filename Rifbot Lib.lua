@@ -9,6 +9,7 @@
 	Map
 	Container
 	Proxy
+	Cavebot
 	Misc
 
 ]]
@@ -2604,6 +2605,82 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Proxy.PrivateClearMessage()	
 	return proxyPrivateClearMessage()
+end
+
+
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--+
+--+						 .d8888b.                             888               888         .d8888b.  888                            
+--+						d88P  Y88b                            888               888        d88P  Y88b 888                            
+--+						888    888                            888               888        888    888 888                            
+--+						888         8888b.  888  888  .d88b.  88888b.   .d88b.  888888     888        888  8888b.  .d8888b  .d8888b  
+--+						888            "88b 888  888 d8P  Y8b 888 "88b d88""88b 888        888        888     "88b 88K      88K      
+--+						888    888 .d888888 Y88  88P 88888888 888  888 888  888 888        888    888 888 .d888888 "Y8888b. "Y8888b. 
+--+						Y88b  d88P 888  888  Y8bd8P  Y8b.     888 d88P Y88..88P Y88b.      Y88b  d88P 888 888  888      X88      X88 
+--+						 "Y8888P"  "Y888888   Y88P    "Y8888  88888P"   "Y88P"   "Y888      "Y8888P"  888 "Y888888  88888P'  88888P'
+--+
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Walker = {}
+Targeting = {}
+Looter = {}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.Enabled(state)
+--> Description: 	Set walker state enable/disable
+--> Class: 			Cavebot
+--> Params:			
+-->					@state bool true or false
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.Enabled(state)	
+	if state == nil then
+		state = false
+	end	
+	return walkerSetState(state)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.Goto(label)
+--> Description: 	Go to specific label name in walker
+--> Class: 			Cavebot
+--> Params:			
+-->					@label string name of label to go
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.Goto(label)	
+	if label == nil then return false end
+	return walkerGoto(label)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.Enabled(state)
+--> Description: 	Set targeting state enable/disable
+--> Class: 			Cavebot
+--> Params:			
+-->					@state bool true or false
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.Enabled(state)	
+	if state == nil then
+		state = false
+	end	
+	return targetingSetState(state)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Looter.Enabled(state)
+--> Description: 	Set looter state enable/disable
+--> Class: 			Cavebot
+--> Params:			
+-->					@state bool true or false
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Looter.Enabled(state)	
+	if state == nil then
+		state = false
+	end	
+	return looterSetState(state)
 end
 
 
