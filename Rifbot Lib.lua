@@ -30,7 +30,8 @@ RIFBOT_SOUNDS = {
 	"Out Of Blanks.mp3", 
 	"Player Attack.mp3", 
 	"Player On Screen.mp3", 
-	"Private Message.mp3", 
+	"Private Message.mp3",
+	"Walker Stuck.mp3",
 	-- add your here,
 	"VIP Online.mp3"
 }
