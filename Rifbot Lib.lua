@@ -9,7 +9,7 @@
 	Map
 	Container
 	Proxy
-	Cavebot
+	Cavebot	
 	Misc
 
 ]]
@@ -30,7 +30,7 @@ RIFBOT_SOUNDS = {
 	"Out Of Blanks.mp3", 
 	"Player Attack.mp3", 
 	"Player On Screen.mp3", 
-	"Private Message.mp3",
+	"Private Message.mp3", 
 	"Walker Stuck.mp3",
 	-- add your here,
 	"VIP Online.mp3"
@@ -682,8 +682,20 @@ function Self.ManaPercent()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Self.ManaMax()
---> Description: 	Read self character max mana points.
+--> Function:		Self.Level()
+--> Description: 	Read self character level.
+--> Class: 			Self
+--> Params:			None
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.Level()
+	return selfLevel()	 
+end
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.Capity()
+--> Description: 	Read self character capity.
 --> Class: 			Self
 --> Params:			None
 --> Return: 		number
@@ -2642,6 +2654,17 @@ function Walker.Enabled(state)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.isEnabled()
+--> Description: 	Read state of walker.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.isEnabled()	
+	return walkerIsEnabled()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Walker.Goto(label)
 --> Description: 	Go to specific label name in walker
 --> Class: 			Cavebot
@@ -2670,6 +2693,43 @@ function Targeting.Enabled(state)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.setStuckMode(state)
+--> Description: 	Set targeting stuck mode state enable/disable
+--> Class: 			Cavebot
+--> Params:			
+-->					@state bool true or false
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.setStuckMode(state)	
+	if state == nil then
+		state = false
+	end	
+	return targetingSetStuckMode(state)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.isEnabled()
+--> Description: 	Read state of targeting.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.isEnabled()	
+	return targetingIsEnabled()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.isStuckModeEnabled()
+--> Description: 	Read state of targeting stuck mode true false.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.isStuckModeEnabled()	
+	return targetingIsStuckModeEnabled()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Looter.Enabled(state)
 --> Description: 	Set looter state enable/disable
 --> Class: 			Cavebot
@@ -2682,6 +2742,17 @@ function Looter.Enabled(state)
 		state = false
 	end	
 	return looterSetState(state)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Looter.isEnabled()
+--> Description: 	Read state of looter.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Looter.isEnabled()	
+	return looterIsEnabled()
 end
 
 
