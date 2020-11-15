@@ -980,6 +980,18 @@ function Self.isConnected()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.Soul()
+--> Description: 	Read self character soul points.
+--> Class: 			Self
+--> Params:			None
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.Soul()
+	return selfSoul()	 
+end
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.DistanceFromPosition(x, y, z)
 --> Description: 	Get distance between your character and position location x, y, z.
 --> Class: 			Self
