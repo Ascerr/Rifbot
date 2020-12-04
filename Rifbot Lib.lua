@@ -310,6 +310,21 @@ function Rifbot.MouseClick(x, y, side)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.MouseClickDrag(x1, y2, x2, y2)
+--> Description: 	Drag mouse from source to destination pos in background. 
+--> Class: 			Rifbot
+--> Params:
+-->					@x1 - number position from x on game client.
+-->					@y1 - number position from y on game client.
+-->					@x2 - number position to x on game client.
+-->					@y2 - number position to y on game client.
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.MouseClickDrag(x1, y1, x2, y2)
+	return mouseClickDrag(x1, y1, x2, y2)	 
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Rifbot.ExecuteScript(script, onOff)
 --> Description: 	Execute lua script to scripter console.
 --> Class: 			Rifbot
@@ -393,6 +408,17 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Rifbot.GetGroundPosUnderMouse()
 	return getGroundFromMouse()
+end	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.GetMousePos()
+--> Description: 	Get mouse position x, y on game client.
+--> Class: 			Rifbot
+--> Params:			None
+--> Return: 		table = {x = ?, y = ?}.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.GetMousePos()
+	return getMousePos()
 end	
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2082,7 +2108,35 @@ function Map.SquareContainsItem(square, itemid)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Map.UseItem(x, y, z, itemid)
+--> Function:		Map.GetTopMoveItem(x, y, z)
+--> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Medivia and Kasteria]
+--> Class: 			Map
+--> Params:			
+-->					@x coordinate in the map on the x-axis
+-->					@y coordinate in the map on the y-axis
+-->					@z coordinate in the map on the z-axis
+--> Return: 		table = {id=?, count=?}	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Map.GetTopMoveItem(x, y, z)
+	return mapGetTopMoveItem(x, y, z)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Map.GetItems(x, y, z)
+--> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Medivia and Kasteria]
+--> Class: 			Map
+--> Params:			
+-->					@x coordinate in the map on the x-axis
+-->					@y coordinate in the map on the y-axis
+-->					@z coordinate in the map on the z-axis
+--> Return: 		table = {{id=?, count=?}, {id2=?, count2=?}	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Map.GetItems(x, y, z)
+	return mapGetItems(x, y, z)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Map.UseItem(x, y, z, itemid, stack, delay)
 --> Description: 	Use item on map x, y, z, e.g. open house window.
 --> Class: 			Map
 --> Params:			
@@ -2100,7 +2154,6 @@ function Map.UseItem(x, y, z, itemid, stack, delay)
 	end	
 	return mapUseItem(x, y, z, itemid, stack, delay)
 end
-
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
@@ -2151,6 +2204,18 @@ function Container.isOpen(index)
 	end
 	return true	
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.Amount()
+--> Description: 	Read amount of opens containers.
+--> Class: 			Container
+--> Params:			
+--> Return: 		int amount of containers.	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.Amount()
+	return getContainerAmount()
+end
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Container.getItems(special)
