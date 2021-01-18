@@ -215,16 +215,16 @@ end
 function Rifbot.PlaySound(sound)
 	local t = type(sound)
 	if t == "nil" then
-		sound = RIFBOT_SOUNDS[0]
+		sound = RIFBOT_SOUNDS[1]
 	elseif t == "number" then
 		if sound > (table.count(RIFBOT_SOUNDS) - 1) then
-			sound = RIFBOT_SOUNDS[0]
+			sound = RIFBOT_SOUNDS[1]
 		else
 			sound = RIFBOT_SOUNDS[sound]
 		end
 	elseif t == "string" then
 		if not table.find(RIFBOT_SOUNDS, sound) then 
-			sound = RIFBOT_SOUNDS[0] 
+			sound = RIFBOT_SOUNDS[1] 
 		end					
 	end
 	return playSound(sound)
@@ -718,6 +718,16 @@ function Self.Level()
 	return selfLevel()	 
 end
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.Exp()
+--> Description: 	Read self character exp points.
+--> Class: 			Self
+--> Params:			None
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.Exp()
+	return selfExp()	 
+end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.Capity()
@@ -2891,6 +2901,9 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function table.count(table)
 	local count = 0
+	if type(table) ~= "table" then
+		return count
+	end		
 	for v, k in pairs(table) do
 		count = count + 1
 	end
@@ -2931,7 +2944,7 @@ function string.instr(str, message)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		printf(...)
+--> Function:		printf(...) or print(...)
 --> Description: 	Send to Rifbot console multiple params e.g. printf(Self.Name(), Self.ID(), Self.HealthPercent())
 --> Class: 			Misc
 --> Params:			
@@ -2949,6 +2962,8 @@ function printf(...)
     end
 	return Rifbot.ConsoleWrite(text)
 end
+
+function print(...) return printf(...) end	
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		wait(a, b)
