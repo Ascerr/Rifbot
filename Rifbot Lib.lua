@@ -1434,7 +1434,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.EquipItem(slot, itemid, count, delay)
---> Description: 	Equip item id with quntity do equipment slot.
+--> Description: 	Equip item id with quantity do equipment slot.
 --> Class: 			Self
 --> Params:			
 -->					@slot - number 0-9 or SLOT_HELMET etc.
@@ -1484,7 +1484,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.DequipItem(slot, contNr, contSlot, delay)
---> Description: 	Equip item id with quntity do equipment slot.
+--> Description: 	Equip item id with quantity do equipment slot.
 --> Class: 			Self
 --> Params:			
 -->					@slot - number 0-9 or SLOT_HELMET etc.
@@ -1574,7 +1574,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.PickupItem(x, y, z, itemid, count, contNr, contSlot, delay)
---> Description: 	Pickup item from ground to container. For equipment use Self.EquipItemFromGround(x, y, z, slot, itemid, count, delay)
+--> Description: 	Pickup item from ground to container. For equipment use Self.EquipItemFromGround(slot, x, y, z, itemid, count, delay)
 --> Class: 			Self
 --> Params:			
 -->					@x coordinate in the map on the x-axis
@@ -2039,7 +2039,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Creature.Attack(creatureID)
---> Description: 	Attack creature.
+--> Description: 	Attack creature
 --> Class: 			Creature
 --> Params:			
 -->					@creatureID number returned by Creature.getCreatures(special).id
@@ -2164,6 +2164,35 @@ function Map.UseItem(x, y, z, itemid, stack, delay)
 	end	
 	return mapUseItem(x, y, z, itemid, stack, delay)
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Map.MoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, delay)
+--> Description: 	Move item from source ground x, y, z to destination ground x, y, z. [#Implemented only for Medivia and Kasteria]
+--> Class: 			Map
+--> Params:			
+-->					@fromX coordinate in the map on the x-axis
+-->					@fromY coordinate in the map on the y-axis
+-->					@fromZ coordinate in the map on the z-axis
+-->					@toZ coordinate in the map on the x-axis
+-->					@toY coordinate in the map on the y-axis
+-->					@toZ coordinate in the map on the z-axis
+-->					@itemid - number item id.
+-->					@quantity - number amount to move min 1 max 100
+-->					@delay - number execution delay (default math.random(350, 1200))
+--> Return: 		boolean true or false		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Map.MoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, delay)
+	if delay == nil then
+		delay = math.random(350, 700)
+	end
+	if quantity < 1 then 
+		quantity = 1
+	elseif quantity > 100 then
+		quantity = 100
+	end		
+	return mapMoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, delay)
+end
+	
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
