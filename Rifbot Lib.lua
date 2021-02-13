@@ -47,7 +47,7 @@ NORTHWEST = 6
 NORTHEAST = 7
 
 --> Containers index
-CONTAINER_BASEINDEX = 64
+CONTAINER_BASEINDEX = contBaseIndex
 EQUIPMENT_BASEINDEX = 1
 
 --> Attack types
@@ -111,10 +111,18 @@ SKULL_WHITE = 3
 SKULL_RED = 4
 
 --> Fluids *Old tibia store fluids as one id and count is flag to "mana", "fluid" etc.
-MANA_FLUID = {id = 2874, count = 7}
+MANA_FLUID = manaFluidItem
 
 --> Friends.txt path
 FRIENDS_PATH = friendsPath
+
+--> Item attributes
+ITEM_FLAG_CONTAINER = 4
+ITEM_FLAG_STACKABLE = 5
+ITEM_FLAG_NOT_WALKABLE = 12
+ITEM_FLAG_NOT_MOVEABLE = 13
+ITEM_FLAG_NOT_PATHABLE = 15
+ITEM_FLAG_PICKABLE = 16
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
@@ -2136,7 +2144,7 @@ end
 -->					@x coordinate in the map on the x-axis
 -->					@y coordinate in the map on the y-axis
 -->					@z coordinate in the map on the z-axis
---> Return: 		table = {id=?, count=?}	
+--> Return: 		table = {id=?, count=?, stack=?}	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Map.GetTopMoveItem(x, y, z)
 	return mapGetTopMoveItem(x, y, z)
@@ -2897,6 +2905,7 @@ end
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VIP = {}
+Item = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		VIP.isOnline(name)
@@ -3033,4 +3042,18 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function classicTibiaRelogin()
 	return classicTibiaReconnect()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Item.hasAttribute(id, attr)
+--> Description: 	Check if current item.id has attribute such as pathable, walkable, stackbale etc. Scroll at top of this file for more attributes.
+-->					[#Implemented only for Kasteria and Medivia]
+--> Class: 			Misc
+--> Params:			
+-->					@id - number item id.
+-->					@attr - number item attribute to check.
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Item.hasAttribute(id, attr)
+	return itemHasAttribute(id, attr)
 end
