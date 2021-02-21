@@ -2138,7 +2138,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.GetTopMoveItem(x, y, z)
---> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Medivia and Kasteria]
+--> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
 --> Class: 			Map
 --> Params:			
 -->					@x coordinate in the map on the x-axis
@@ -2152,7 +2152,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.GetItems(x, y, z)
---> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Medivia and Kasteria]
+--> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
 --> Class: 			Map
 --> Params:			
 -->					@x coordinate in the map on the x-axis
@@ -2186,7 +2186,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.MoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, delay)
---> Description: 	Move item from source ground x, y, z to destination ground x, y, z. [#Implemented only for Medivia and Kasteria]
+--> Description: 	Move item from source ground x, y, z to destination ground x, y, z. [#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
 --> Class: 			Map
 --> Params:			
 -->					@fromX coordinate in the map on the x-axis
@@ -3047,7 +3047,7 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Item.hasAttribute(id, attr)
 --> Description: 	Check if current item.id has attribute such as pathable, walkable, stackbale etc. Scroll at top of this file for more attributes.
--->					[#Implemented only for Kasteria and Medivia]
+-->					[#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
 --> Class: 			Misc
 --> Params:			
 -->					@id - number item id.
