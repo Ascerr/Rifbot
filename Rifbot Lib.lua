@@ -2136,7 +2136,7 @@ Map = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.getArea(range)
---> Description: 	Get map with specific range. Warring! This function is take a lot of CPU.
+--> Description: 	Get map with specific range. Warring! This function is take a lot of CPU. [#Outdated func works only for Retrocores, Classic Tibia and Imperianic]
 --> Class: 			Map
 --> Params:			
 -->					@range number map distance area
@@ -2154,7 +2154,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.SquareContainsItem(square, itemid)
---> Description: 	Check map square for single item or table of items.
+--> Description: 	Check map square for single item or table of items. [#Outdated func works only for Retrocores, Classic Tibia and Imperianic]
 --> Class: 			Map
 --> Params:			
 -->					@square table returned by Map.getArea(range)[x].items
@@ -2182,7 +2182,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.GetTopMoveItem(x, y, z)
---> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
+--> Description: 	Read tile on x, y, z for itemid and quantity.
 --> Class: 			Map
 --> Params:			
 -->					@x coordinate in the map on the x-axis
@@ -2196,7 +2196,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.GetItems(x, y, z)
---> Description: 	Read tile on x, y, z for itemid and quantity.[#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
+--> Description: 	Read tile on x, y, z for itemid and quantity.
 --> Class: 			Map
 --> Params:			
 -->					@x coordinate in the map on the x-axis
@@ -2230,7 +2230,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.MoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, delay)
---> Description: 	Move item from source ground x, y, z to destination ground x, y, z. [#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
+--> Description: 	Move item from source ground x, y, z to destination ground x, y, z.
 --> Class: 			Map
 --> Params:			
 -->					@fromX coordinate in the map on the x-axis
@@ -2755,6 +2755,7 @@ end
 
 Proxy = {}
 
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Proxy.ErrorGetLastMessage()
 --> Description: 	Read last error message proxy (white).
@@ -2797,6 +2798,21 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Proxy.PrivateClearMessage()	
 	return proxyPrivateClearMessage()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Proxy.New(name)
+--> Description: 	Register function for callback proxy messages // 2021-03-11 Implemented only for Realesta
+--> Class: 			Proxy
+--> Params:			
+-->					@name - string function name to register
+--> Usage:			function proxy(messages) for i, msg in ipairs(messages) do print(msg.speaker, msg.message, msg.channel, msg.mode, msg.level) end end Proxy.New("proxy")
+-->					for default messages channel = 0, mode <= 3	(normal, whisper, yell)					
+-->
+--> Return: 		boolean true or false	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Proxy.New(name)
+	return proxyNew(name)
 end
 
 
@@ -3101,7 +3117,6 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Item.hasAttribute(id, attr)
 --> Description: 	Check if current item.id has attribute such as pathable, walkable, stackbale etc. Scroll at top of this file for more attributes.
--->					[#Implemented only for Kasteria, Medivia, Nostalrius & Valoria]
 --> Class: 			Misc
 --> Params:			
 -->					@id - number item id.
