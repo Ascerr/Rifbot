@@ -440,6 +440,17 @@ function Rifbot.GetScriptName()
 	return selfScriptName
 end	
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.ExitGameClient()
+--> Description: 	Kill process of game client.
+--> Class: 			Rifbot
+--> Params:			None
+--> Return: 		boolean true of false		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.ExitGameClient()
+	return exitGameClient()
+end
+
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+      				888b     d888               888          888               .d8888b.  888                            
@@ -2807,7 +2818,7 @@ end
 --> Params:			
 -->					@name - string function name to register
 --> Usage:			function proxy(messages) for i, msg in ipairs(messages) do print(msg.speaker, msg.message, msg.channel, msg.mode, msg.level) end end Proxy.New("proxy")
--->					for default messages channel = 0, mode <= 3	(normal, whisper, yell)					
+-->					-- for default messages channel = 0, mode <= 3	(normal, whisper, yell)					
 -->
 --> Return: 		boolean true or false	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
