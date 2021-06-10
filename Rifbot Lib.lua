@@ -2884,6 +2884,32 @@ function Walker.Goto(label)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.setLureMode(state)
+--> Description: 	Set walker lure mode enable/disable
+--> Class: 			Cavebot
+--> Params:			
+-->					@state bool true or false
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.setLureMode(state)	
+	if state == nil then
+		state = false
+	end	
+	return walkerSetLureMode(state)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.isLureModeEnabled()
+--> Description: 	Read state of walker lure mode true false.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.isLureModeEnabled()	
+	return walkerIsLureModeEnabled()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Targeting.Enabled(state)
 --> Description: 	Set targeting state enable/disable
 --> Class: 			Cavebot
