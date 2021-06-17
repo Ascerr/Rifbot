@@ -213,6 +213,17 @@ function Rifbot.ConsoleWrite(text)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.FlashWindow()
+--> Description: 	Flash inactive game window.
+--> Class: 			Rifbot
+-->
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.FlashWindow()
+	return flashWindow()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Rifbot.PlaySound(sound)
 --> Description: 	Plays sound and flash game window.
 --> Class: 			Rifbot
