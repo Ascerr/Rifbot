@@ -462,6 +462,18 @@ function Rifbot.ExitGameClient()
 	return exitGameClient()
 end
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.setCriticalMode(enabled)
+--> Description: 	Run lua scripts much faster than standard 200ms loop.
+--> Class: 			Rifbot
+--> Params:			
+-->					@enabled - boolean true or false
+--> Return: 		boolean true of false		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.setCriticalMode(enabled)
+	return setCriticalMode(enabled)
+end
+
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+      				888b     d888               888          888               .d8888b.  888                            
@@ -2137,6 +2149,22 @@ function Creature.Attack(creatureID)
 	return creatureAttack(creatureID)	
 end
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Creature.Reach(creature, mode)
+--> Description: 	Reach creature by follow, diagonal or keep distance
+--> Class: 			Creature
+--> Params:			
+-->					@creature table returned by Creature.getCreatures(special)
+-->					@mode string type of reaching: "2sqm", "3sqm", "4sqm", "follow", "diagonal"
+--> Return: 		boolean true or false
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Creature.Reach(creature, mode)
+	if table.count(creature) < 3 then return false end
+	if mode == nil then
+		mode = "follow"
+	end		
+	return creatureReach(creature, mode)	
+end
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
@@ -2158,7 +2186,7 @@ Map = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.getArea(range)
---> Description: 	Get map with specific range. Warring! This function is take a lot of CPU. [#Outdated func works only for Retrocores, Classic Tibia and Imperianic]
+--> Description: 	Get map with specific range. Warring! This function is take a lot of CPU. [#Outdated func works only Classic Tibia]
 --> Class: 			Map
 --> Params:			
 -->					@range number map distance area
@@ -2176,7 +2204,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.SquareContainsItem(square, itemid)
---> Description: 	Check map square for single item or table of items. [#Outdated func works only for Retrocores, Classic Tibia and Imperianic]
+--> Description: 	Check map square for single item or table of items. [#Outdated func works only Classic Tibia]
 --> Class: 			Map
 --> Params:			
 -->					@square table returned by Map.getArea(range)[x].items
@@ -2729,6 +2757,19 @@ function Container.Close(container, delay)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Container.CloseAll()
+--> Description: 	Close all containers.
+--> Class: 			Container
+--> Params:			None
+--> Return: 		boolean true or false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.CloseAll()
+	for i = 0, 15 do
+		containerClose(i, 0)
+	end	
+end	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Container.Back(container, delay)
 --> Description: 	Go back container index.
 --> Class: 			Container
@@ -2973,6 +3014,29 @@ function Targeting.isStuckModeEnabled()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.setAttackMode(mode)
+--> Description: 	Set new attack mode for targeting.
+--> Class: 			Cavebot
+--> Params:			
+-->					@mode - string mode: "none", "follow", "3sqm", "4sqm", "diagonal"
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.setAttackMode(mode)
+	return targetingSetAttackMode(mode)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.getAttackMode()
+--> Description: 	Read for current attack mode if targeting.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		string attack mode
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.getAttackMode()
+	return targetingGetAttackMode()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Looter.Enabled(state)
 --> Description: 	Set looter state enable/disable
 --> Class: 			Cavebot
@@ -3007,6 +3071,19 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Looter.isLooting()	
 	return looterIsLooting()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Looter.AddCreature(creature)
+--> Description: 	Add creture as new position to looter. If creature died bot will open it, storage looted creature is done on executabe side.
+--> Class: 			Cavebot
+--> Params:			
+-->					@creature - table returned by Creature.GetCreatures()
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Looter.AddCreature(creature)	
+	if table.count(creature) < 2 then return false end
+	return looterAddCreature(creature.addr)
 end
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
