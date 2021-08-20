@@ -2252,7 +2252,7 @@ end
 -->					@x coordinate in the map on the x-axis
 -->					@y coordinate in the map on the y-axis
 -->					@z coordinate in the map on the z-axis
---> Return: 		table = {{id=?, count=?}, {id2=?, count2=?}	
+--> Return: 		table = {{id=?, count=?}, {id=?, count=?}	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Map.GetItems(x, y, z)
 	return mapGetItems(x, y, z)
@@ -2865,7 +2865,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Proxy.New(name)
---> Description: 	Register function for callback proxy messages // 2021-03-11 Implemented only for Realesta
+--> Description: 	Register function for callback proxy messages visibile as yellow and orange.
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
@@ -2876,6 +2876,20 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Proxy.New(name)
 	return proxyNew(name)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Proxy.TextNew(name)
+--> Description: 	Register function for callback proxy messages visible as any other than yellow and orange. // 2021-08-20 Implemented only for Nostalrius
+--> Class: 			Proxy
+--> Params:			
+-->					@name - string function name to register
+--> Usage:			function proxy(messages) for i, msg in ipairs(messages) do print(msg.message, msg.mode) end end Proxy.TextNew("proxy")					
+-->
+--> Return: 		boolean true or false	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Proxy.TextNew(name)
+	return proxyTextNew(name)
 end
 
 
@@ -3018,7 +3032,7 @@ end
 --> Description: 	Set new attack mode for targeting.
 --> Class: 			Cavebot
 --> Params:			
--->					@mode - string mode: "none", "follow", "3sqm", "4sqm", "diagonal"
+-->					@mode - string mode: "none", "follow", "3sqm", "4sqm", "diagonal", "diagonal 3sqm", "face"
 --> Return: 		boolean true/false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Targeting.setAttackMode(mode)
