@@ -152,15 +152,16 @@ function Rifbot.isEnabled()
 end	
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Rifbot.setEnabled(state)
---> Description: 	Enable or disable bot.
+--> Function:		Rifbot.setEnabled(state, lua)
+--> Description: 	Enable or disable bot and lua scripts.
 --> Class: 			Rifbot
 --> Params: 		
 -->					@state - boolean true or false
+-->					@lua - boolean true or false disable lua too
 --> Return: 		boolean true or false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Rifbot.setEnabled(state)
-	return setBotEnabled(state)
+function Rifbot.setEnabled(state, lua)
+	return setBotEnabled(state, lua)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2390,6 +2391,22 @@ function Container.getItems(special)
 		special = -1
 	end	
 	return getContainerItems(special)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:       Container.getLastItem(index)
+--> Description:    Find last item in specific container.
+--> Class:          Container
+--> Params:         
+-->                 @index number 0-15 container index
+--> Return:         table = {index = ?, slot = ?, id = ?, count = ?}        
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Container.getLastItem(index)
+    index = tonumber(index)
+    local items = Container.getItems(index)
+    if #items < 1 then return {index = index, slot = 0, id = 0, count = 0} end
+    local item = items[#items]
+    return {index = index, slot = #items - 1, id = item.id, count = item.count}
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
