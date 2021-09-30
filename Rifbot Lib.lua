@@ -16,6 +16,7 @@
 
 --> Note: 
 -->		1. To print boolean with string you have to use additional printf("print boolean: " .. tostring(true))
+-->		2. Using infinite loops while true do or do until always put wait() to avoid program hang.
 
 --> Alarms files from Rifbot\Alarms
 RIFBOT_SOUNDS = {
@@ -486,10 +487,10 @@ end
 --+      				888   "   888 Y88..88P Y88b 888 Y88b 888 888 Y8b.         Y88b  d88P 888 888  888      X88      X88 
 --+      				888       888  "Y88P"   "Y88888  "Y88888 888  "Y8888       "Y8888P"  888 "Y888888  88888P'  88888P' 
 --+
---++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
 Module = {}
 libModules = {}
+libOnLabel = {}
 Module.__index = Module
 modulesRegistered = false
 Module.__routine = nil
@@ -531,15 +532,33 @@ function libDestroyTimer(name)
 	end
 end
 
+-- This function should not be used by the regular user and is therefore not explained
+function onLabelListener(label)
+	if libOnLabel.routine == nil or coroutine.status(libOnLabel.routine) == "dead" then
+		libOnLabel.routine = coroutine.create(function ()
+			libOnLabel.func(label)
+			walkerContinue(label)
+		end)
+		coroutine.resume(libOnLabel.routine)
+	else	
+		if os.clock() > libOnLabel.time then
+			libOnLabel.time = 0
+			coroutine.resume(libOnLabel.routine)
+		end
+	end	
+end
+
+
 --- This function should not be used by the regular user and is therefore not explained
 function sleep(deltaTime)
-	if Module.__routine == nil then
-		return false -- no coroutine created.
-	end	
-	if deltaTime < 200 then
-		deltaTime = 200
-	end	
-	Module.__routineTime = os.clock() + (deltaTime / 1000)
+	local currentCoroutine = coroutine.running()
+	if not currentCoroutine then return end
+	deltaTime = os.clock() + (deltaTime / 1000)
+	if currentCoroutine == libOnLabel.routine then
+		libOnLabel.time = deltaTime
+	elseif currentCoroutine == Module.__routine then
+		Module.__routineTime = deltaTime
+	end
 	coroutine.yield()
 end
 
@@ -2993,6 +3012,27 @@ function Walker.isLureModeEnabled()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.onLabel(name)
+--> Description: 	Register function for callback label signals.
+--> Class: 			Walker
+--> Params:			
+-->					@name - string function name to register
+--> Usage:			function label(name) print("label = " .. name) end Walker.onLabel("label")
+-->					To finish more complicated actions use while loop e.g.
+-->					if name == "start" then local counter = 0 while true do wait() counter = counter + 1 print("counter = " .. counter) if counter >= 10 then break end end end 				
+-->
+--> Return: 		boolean true or false	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.onLabel(name)
+	local func = _G[name]
+	if type(func) ~= "function" then return false end
+	libOnLabel.time = 0
+	libOnLabel.func = func
+	libOnLabel.routine = nil
+	return labelNew("onLabelListener")
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Targeting.Enabled(state)
 --> Description: 	Set targeting state enable/disable
 --> Class: 			Cavebot
@@ -3238,11 +3278,10 @@ function printf(...)
 	return Rifbot.ConsoleWrite(text)
 end
 
-function print(...) return printf(...) end	
-
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		wait(a, b)
---> Description: 	Pause only Module execution for @a or random(@a, @b) time miliseconds. Minimal time is 200ms.
+--> Description: 	Pause execution for @a or random(@a, @b) time miliseconds. Minimal time is 200ms.
+-->					Current support: Modules, Walker.onLabel and Walker onelinelua.
 --> Class: 			Misc
 --> Params:			
 -->					@a number milisceonds to wait min 200ms 
@@ -3250,6 +3289,7 @@ function print(...) return printf(...) end
 --> Return: 		void nothing.		
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function wait(a, b)
+	if a == nil then a = 200 end
 	if b == nil then
 		sleep(a)
 	else
@@ -3282,3 +3322,7 @@ end
 function Item.hasAttribute(id, attr)
 	return itemHasAttribute(id, attr)
 end
+
+--> Just replacing exisiting functions with new ones.
+function print(...) return printf(...) end	
+function dofile(name) return loadfile(luaScriptPath .. name)() end
