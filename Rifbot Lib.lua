@@ -17,6 +17,8 @@
 --> Note: 
 -->		1. To print boolean with string you have to use additional printf("print boolean: " .. tostring(true))
 -->		2. Using infinite loops while true do or do until always put wait() to avoid program hang.
+-->		3. In lua tables first index start from 1.
+-->		4. Doing operations on containers like a drop items always decrease slot by 1.
 
 --> Alarms files from Rifbot\Alarms
 RIFBOT_SOUNDS = {
@@ -1665,6 +1667,20 @@ function Self.Step(direction)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.WalkTo(x, y, z)
+--> Description: 	Start movement to map position x, y, z with 1 sqm per function call. (This function works only on otclient)
+--> Class: 			Self
+--> Params:			
+-->					@x coordinate in the map on the x-axis
+-->					@y coordinate in the map on the y-axis
+-->					@z coordinate in the map on the z-axis
+--> Return: 		boolean true or false
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.WalkTo(x, y, z)
+	return selfWalkTo(x, y, z)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.DropItem(x, y, z, id, count, delay)
 --> Description: 	Throw itemid on map x, y, z with special quantity @count. Reading containers and equipment.
 --> Class: 			Self
@@ -2004,11 +2020,11 @@ end
 -->					@range number distance from your character
 -->					@multifloor boolean true or false search for above and blow floors or not
 --> Return: 		On failure returns empty table 
--->					On success reaturns:
+-->					On success returns:
 -->						table = {
 -->							table = {id = ?, name = ?, x = ?, y = ?, z = ?, hpperc = ?, alive = ?, direction = ?, addr = ?, attack = ?, party = ?},
 -->							table2 = {see above},
--->							tabkeN = {see above}		
+-->							tableN = {see above}		
 -->						}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Creature.iFunction(group, range, multifloor)
@@ -2901,7 +2917,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Proxy.New(name)
---> Description: 	Register function for callback proxy messages visibile as yellow and orange.
+--> Description: 	Register function for callback proxy messages visibile as yellow and orange. Registering new function will replace current one.
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
@@ -2916,7 +2932,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Proxy.TextNew(name)
---> Description: 	Register function for callback proxy messages visible as any other than yellow and orange. // 2021-08-20 Implemented only for Nostalrius
+--> Description: 	Register function for callback proxy messages visible as any other than yellow and orange. Registering new function will replace current one.
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
@@ -3115,7 +3131,7 @@ end
 -->					@state bool true or false
 --> Return: 		void nothing.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Looter.Enabled(state)	
+function Looter.Enabled(state)
 	if state == nil then
 		state = false
 	end	
