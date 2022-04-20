@@ -1371,6 +1371,19 @@ function Self.isItemFunPlaying()
 	return selfIsItemPlaying()
 end
 
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.GetTeleported()
+--> Description: 	Read if your character was teleported from sqm to sqm. Including stairs chopping or rope spot.
+--> Class: 			Self
+--> Params:			None
+--> Return: 		if true then new teleported position table = {x = ?, y = ?, z =?}, if false boolean false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.GetTeleported()
+	return selfGetTeleported()
+end
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.Speak(text, type)
 --> Description: 	Send message to default channel.
@@ -1867,12 +1880,12 @@ Creature = {}
 --> Return: 		On failure returns empty table
 -->					On success returns:
 -->						When @special is creature id or creature name:
--->							table = {id = ?, name = ?, x = ?, y = ?, z = ?, hpperc = ?, alive = ?, direction = ?, addr = ?, attack = ?, party = ?}
+-->							table = {id = ?, name = ?, x = ?, y = ?, z = ?, hpperc = ?, alive = ?, direction = ?, addr = ?, attack = ?, party = ?, skull = ?}
 -->						When @special is emapty:	
 -->							table = {
 -->								table1 = {see above},
 -->								table2 = {see above},
--->								tabkeN = {see above}		
+-->								tableN = {see above}		
 -->							}
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Creature.getCreatures(special)
@@ -2037,7 +2050,11 @@ function Creature.iFunction(group, range, multifloor)
 	local distance = {x = 7, y = 5} 
 	if range >= 5 then
 		distance.x = range
-		distance.y = 5
+		if range <= 7 then 
+			distance.y = 5
+		else
+			distance.y = range
+		end	
 	else
 		distance.x = range
 		distance.y = range
@@ -2961,6 +2978,7 @@ end
 Walker = {}
 Targeting = {}
 Looter = {}
+Cavebot = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Walker.Enabled(state)
@@ -2970,7 +2988,7 @@ Looter = {}
 -->					@state bool true or false
 --> Return: 		void nothing.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Walker.Enabled(state)	
+function Walker.Enabled(state)
 	if state == nil then
 		state = false
 	end	
@@ -3172,6 +3190,35 @@ function Looter.AddCreature(creature)
 	if table.count(creature) < 2 then return false end
 	return looterAddCreature(creature.addr)
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Cavebot.Enabled(state)
+--> Description: 	Set whole cavebot module state enable/disable
+--> Class: 			Cavebot
+--> Params:			
+-->					@state bool true or false
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Cavebot.Enabled(state)
+	if state == nil then
+		state = false
+	end
+	Walker.Enabled(state)
+	Targeting.Enabled(state)
+	Looter.Enabled(state)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Cavebot.isEnabled()
+--> Description: 	Read state of whole cavebot module.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Cavebot.isEnabled()
+	if Walker.isEnabled() and Targeting.isEnabled() and Looter.isEnabled() then return true end
+	return false
+end	
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
