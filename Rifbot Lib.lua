@@ -1827,6 +1827,7 @@ end
 function Self.ItemCount(itemid, container)
 	local items = Container.getItems(container)
 	local amount = 0
+	print("type = " ..MANA_FLUID.type)
 	if container ~= nil then -- search in single cont
 		for i, item in pairs(items) do
 			if itemid == item.id then
@@ -1844,8 +1845,8 @@ function Self.ItemCount(itemid, container)
 			local contItems = cont.items
 			for j, item in pairs(contItems) do
 				if itemid == item.id then
-					if item.id == MANA_FLUID.id then
-						if item.count == MANA_FLUID.count and MANA_FLUID.type == 0 then
+					if item.id == MANA_FLUID.id and MANA_FLUID.type == 0 then
+						if item.count == MANA_FLUID.count then
 							amount = amount + 1
 						end	
 					else
