@@ -127,6 +127,9 @@ ITEM_FLAG_NOT_MOVEABLE = 13
 ITEM_FLAG_NOT_PATHABLE = 15
 ITEM_FLAG_PICKABLE = 16
 
+--> Time
+INITIAL_TIME = -9999999999
+
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+     						8888888b.  d8b  .d888 888               888         .d8888b.  888                            
@@ -1375,7 +1378,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.GetTeleported()
---> Description: 	Read if your character was teleported from sqm to sqm. Including stairs chopping or rope spot.
+--> Description: 	Read if your character was teleported from sqm to sqm. Including stairs chopping or rope spot. [Currently works only For Shadow-Illusion]
 --> Class: 			Self
 --> Params:			None
 --> Return: 		if true then new teleported position table = {x = ?, y = ?, z =?}, if false boolean false.
@@ -1827,7 +1830,7 @@ function Self.ItemCount(itemid, container)
 	if container ~= nil then -- search in single cont
 		for i, item in pairs(items) do
 			if itemid == item.id then
-				if item.id == MANA_FLUID.id then
+				if item.id == MANA_FLUID.id and MANA_FLUID.type == 0 then
 					if item.count == MANA_FLUID.count then
 						amount = amount + 1
 					end	
@@ -1842,7 +1845,7 @@ function Self.ItemCount(itemid, container)
 			for j, item in pairs(contItems) do
 				if itemid == item.id then
 					if item.id == MANA_FLUID.id then
-						if item.count == MANA_FLUID.count then
+						if item.count == MANA_FLUID.count and MANA_FLUID.type == 0 then
 							amount = amount + 1
 						end	
 					else
@@ -2483,7 +2486,7 @@ function Container.FindItem(itemid, special)
 			for j = 1, #contItems do
 				local item = contItems[j]
 				if table.find(itemid, item.id) then
-					if item.id == MANA_FLUID.id then
+					if item.id == MANA_FLUID.id and MANA_FLUID.type == 0 then
 						if item.count == MANA_FLUID.count then
 							return {index = cont.index, slot = (j - 1), id = item.id, count = item.count}
 						end
@@ -2497,7 +2500,7 @@ function Container.FindItem(itemid, special)
 		for i = 1, #items do
 			local item = items[i]
 			if table.find(itemid, item.id) then
-				if item.id == MANA_FLUID.id then
+				if item.id == MANA_FLUID.id and MANA_FLUID.type == 0 then
 					if item.count == MANA_FLUID.count then
 						return {index = special, slot = (i - 1), id = item.id, count = item.count}
 					end
