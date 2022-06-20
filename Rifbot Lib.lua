@@ -1839,7 +1839,6 @@ end
 function Self.ItemCount(itemid, container)
 	local items = Container.getItems(container)
 	local amount = 0
-	print("type = " ..MANA_FLUID.type)
 	if container ~= nil then -- search in single cont
 		for i, item in pairs(items) do
 			if itemid == item.id then
