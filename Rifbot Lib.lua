@@ -70,6 +70,7 @@ PVP_FRIENDLY = 1
 SPEAK_SAY = 1
 SPEAK_WHISPER = 2
 SPEAK_YELL = 3
+SPEAK_NPC = 12 -- * not for all servers will works.
 
 --> Equipment slots
 SLOT_HEAD = 0
@@ -1409,9 +1410,9 @@ end
 --> Return: 		boolean true or false
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.Speak(text, mode)
-	if mode < SPEAK_SAY or mode > SPEAK_YELL then
-		mode = SPEAK_SAY
-	end	
+	if not mode then
+		mode = 1
+	end		
 	return selfSpeak(text, mode)
 end
 
@@ -1425,6 +1426,18 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.Say(text)
 	return Self.Speak(text, SPEAK_SAY)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.SayNpc(text)
+--> Description: 	Send message to Npc channel.
+--> Class: 			Self
+--> Params:			
+-->					@text - string message to say.
+--> Return: 		boolean true or false
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.SayNpc(text)
+	return Self.Speak(text, SPEAK_NPC)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1709,7 +1722,7 @@ function Self.WalkTo(x, y, z)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Self.DropItem(x, y, z, id, count, delay)
+--> Function:		Self.DropItem(x, y, z, itemid, count, delay)
 --> Description: 	Throw itemid on map x, y, z with special quantity @count. Reading containers and equipment.
 --> Class: 			Self
 --> Params:			
