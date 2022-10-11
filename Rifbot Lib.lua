@@ -185,7 +185,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Rifbot.setMacroMode(state)
---> Description: 	Enable or disable afk functions such as Fishing, Runemaker, AntiIdle, FoodEater and Mod: Skill Trainer.
+--> Description: 	Enable or disable afk functions such as Fishing, Runemaker, AntiIdle, FoodEater and Mod: Skill Trainer. (server: Retrocores)
 --> Class: 			Rifbot
 --> Params: 		
 -->					@state - boolean true or false
@@ -2981,7 +2981,7 @@ end
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
---> Usage:			function proxy(messages) for i, msg in ipairs(messages) do print(msg.message, msg.mode) end end Proxy.TextNew("proxy")					
+--> Usage:			function proxyText(messages) for i, msg in ipairs(messages) do print(msg.message, msg.mode) end end Proxy.TextNew("proxyText")					
 -->
 --> Return: 		boolean true or false	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3289,6 +3289,9 @@ end
 --> Return: 		boolean true or false		
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function table.find(table, element)
+	if type(table) ~= "table" then
+		return false
+	end
 	for v, k in pairs(table) do
 		if k == element then 
 			return true
