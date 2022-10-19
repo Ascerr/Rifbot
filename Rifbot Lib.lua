@@ -353,6 +353,18 @@ function Rifbot.MouseClickDrag(x1, y1, x2, y2)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.WriteText(message)
+--> Description: 	Write text message to game client in background. 
+--> Class: 			Rifbot
+--> Params:
+-->					@message - string text to write.
+--> Return: 		nil - nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.WriteText(message)
+	return writeText(message)
+end	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Rifbot.ExecuteScript(script, onOff)
 --> Description: 	Execute lua script to scripter console.
 --> Class: 			Rifbot
