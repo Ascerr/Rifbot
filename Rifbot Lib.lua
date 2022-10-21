@@ -495,6 +495,18 @@ function Rifbot.setCriticalMode(enabled)
 	return setCriticalMode(enabled)
 end
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.LoadSettings(name)
+--> Description: 	Loads settings from Rifbot Folder\Settings
+--> Class: 			Rifbot
+--> Params:			
+-->					@name - string name of settings to load e.g. "Runemaker.txt"
+--> Return: 		nil - nothing		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.LoadSettings(name)
+	return loadSettings(name)
+end	
+
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+      				888b     d888               888          888               .d8888b.  888                            
@@ -2399,7 +2411,27 @@ function Map.MoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, dela
 	return mapMoveItem(fromX, fromY, fromZ, toX, toY, toZ, itemid, quantity, delay)
 end
 	
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Map.UseItemWithGround(fromX, fromY, fromZ, toX, toY, toZ, delay)
+--> Description: 	Use item with from source ground x, y, z to destination ground x, y, z.
+--> Class: 			Map
+--> Params:			
+-->					@fromX coordinate in the map on the x-axis
+-->					@fromY coordinate in the map on the y-axis
+-->					@fromZ coordinate in the map on the z-axis
+-->					@toZ coordinate in the map on the x-axis
+-->					@toY coordinate in the map on the y-axis
+-->					@toZ coordinate in the map on the z-axis
+-->					@delay - number execution delay (default math.random(1000, 1500))
+--> Return: 		boolean true or false		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Map.UseItemWithGround(fromX, fromY, fromZ, toX, toY, toZ, delay)
+	if delay == nil then
+		delay = math.random(1000, 1500)
+	end	
+	return mapUseItemWithGround(fromX, fromY, fromZ, toX, toY, toZ, delay)
+end
+	
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+					 .d8888b.                    888             d8b                                .d8888b.  888                            
@@ -3047,6 +3079,17 @@ function Walker.isEnabled()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.isStuck()
+--> Description: 	Read state of walker if is stuck or not.
+--> Class: 			Cavebot
+--> Params:			None
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.isStuck()	
+	return walkerIsStuck()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Walker.Goto(label)
 --> Description: 	Go to specific label name in walker
 --> Class: 			Cavebot
@@ -3179,6 +3222,18 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Targeting.getAttackMode()
 	return targetingGetAttackMode()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.setAttackRange(dist)
+--> Description: 	Set new attack range for targeting.
+--> Class: 			Cavebot
+--> Params:			
+-->					@dist - number range to attack 
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.setAttackRange(dist)
+	return targetingSetAttackRange(dist)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
