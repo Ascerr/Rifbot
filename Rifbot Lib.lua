@@ -93,6 +93,7 @@ FLAG_ISMANASHIELDED = 16
 FLAG_ISPARALYZED = 32
 FLAG_ISHASTED = 64
 FLAG_ISINFIGHT = 128
+FLAG_ISBUFFED = 4096
 FLAG_ISINPZ = 16384
 
 --> Channels *need to add more
@@ -1000,13 +1001,24 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.isInProtectionZone()
---> Description: 	Read self character flag. Warring! This is available only on servers that draws pz icon under equipment.
+--> Description: 	Read self character flag. Warring! This is available only on servers that draws icon under equipment.
 --> Class: 			Self
 --> Params:			None
 --> Return: 		boolean true or false
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.isInProtectionZone()
 	return selfIsFlag(FLAG_ISINPZ)	 
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.isBuffed()
+--> Description: 	Read self character flag. Warring! This is available only on servers that draws icon under equipment.
+--> Class: 			Self
+--> Params:			None
+--> Return: 		boolean true or false
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.isBuffed()
+	return selfIsFlag(FLAG_ISBUFFED)	 
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
