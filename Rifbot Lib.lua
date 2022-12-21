@@ -371,7 +371,7 @@ end
 --> Class: 			Rifbot
 --> Params:
 -->					@script - string name of script *without ".lua" e.g "Player Logout"
--->					@onOff - boolean true or false.
+-->					@onOff - boolean true or false check if script is running then kill else execute.
 --> Return: 		boolean true or false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Rifbot.ExecuteScript(script, onOff)
@@ -811,6 +811,44 @@ function Self.ManaPercent()
 	end
 	return math.floor(n / selfManaMax() * 100)	 
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.Spirit()
+--> Description: 	Read self character spirit points (available on some server like Elderan)
+--> Class: 			Self
+--> Params:			None
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.Spirit()
+	return selfSpirit()	 
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.SpiritMax()
+--> Description: 	Read self character max spirit points (available on some server like Elderan)
+--> Class: 			Self
+--> Params:			None
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.SpiritMax()
+	return selfSpiritMax()	 
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.SpiritPercent()
+--> Description: 	Read self character spirit percent (available on some server like Elderan)
+--> Class: 			Self
+--> Params:			None
+--> Return: 		number
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.SpiritPercent()
+	local n = selfSpirit()
+	if n <= 0 then 
+		return 0 
+	end
+	return math.floor(n / selfSpiritMax() * 100)	 
+end
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.Level()
