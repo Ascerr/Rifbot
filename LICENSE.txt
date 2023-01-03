@@ -1,5 +1,5 @@
 Rifbot for Tibia 7.4-8.0
-Copyright (c) Rifbot 2023
+Copyright (c) Rifbot
 
 1. System
 Program support only Microsoft Windows operating system.
