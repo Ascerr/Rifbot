@@ -3060,7 +3060,7 @@ end
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
---> Usage:			function proxy(messages) for i, msg in ipairs(messages) do print(msg.speaker, msg.message, msg.channel, msg.mode, msg.level) end end Proxy.New("proxy")
+--> Usage:			function proxy(messages) for i, msg in ipairs(messages) do print("proxy: " .. msg.speaker, msg.message, msg.channel, msg.mode, msg.level) end end Proxy.New("proxy")
 -->					-- for default messages channel = 0, mode <= 3	(normal, whisper, yell)					
 -->
 --> Return: 		boolean true or false	
@@ -3075,7 +3075,7 @@ end
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
---> Usage:			function proxyText(messages) for i, msg in ipairs(messages) do print(msg.message, msg.mode) end end Proxy.TextNew("proxyText")					
+--> Usage:			function proxyText(messages) for i, msg in ipairs(messages) do print("proxyText: " .. msg.message, msg.mode) end end Proxy.TextNew("proxyText")
 -->
 --> Return: 		boolean true or false	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3198,6 +3198,21 @@ function Walker.onLabel(name)
 	libOnLabel.routine = nil
 	return labelNew("onLabelListener")
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.SettingsChange(setting, data)
+--> Description: 	Set new value for walker -> settings
+--> Class: 			Walker
+--> Params:			
+-->					@setting - string settings name inside walker example: "Re Walk Delay" or "Open Bp Delay"
+-->					@data - string or number new value to set
+-->
+--> Return: 		boolean true or false	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.SettingsChange(setting, data)
+	if setting == nil or data == nil then return false end
+	return walkerSettingsChange(setting, data)
+end	
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Targeting.Enabled(state)
@@ -3328,7 +3343,7 @@ end
 --> Description: 	Add creture as new position to looter. If creature died bot will open it, storage looted creature is done on executabe side.
 --> Class: 			Cavebot
 --> Params:			
--->					@creature - table returned by Creature.GetCreatures()
+-->					@creature - table returned by Creature.getCreatures()
 --> Return: 		boolean true/false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Looter.AddCreature(creature)	
@@ -3533,6 +3548,7 @@ end
 function Item.hasAttribute(id, attr)
 	return itemHasAttribute(id, attr)
 end
+
 
 --> Just replacing exisiting functions with new ones.
 function print(...) return printf(...) end	
