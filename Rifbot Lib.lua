@@ -2588,7 +2588,7 @@ end
 --> Description: 	Search all containers for itemid.
 --> Class: 			Container
 --> Params:			
--->					@itemid number
+-->					@itemid number item id to find
 -->					@special number 0-15 container index (optional search for special container index)
 --> Return: 		On failure: boolean false
 -->					On success: table = {index = ?, slot = ?, id = ?, count = ?}		
@@ -3150,6 +3150,17 @@ end
 function Walker.Goto(label)	
 	if label == nil then return false end
 	return walkerGoto(label)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Walker.NextWpt()
+--> Description: 	Go to next wpt in walker. If last then will go to first.
+--> Class: 			Cavebot
+--> Params:			None	
+--> Return: 		void nothing.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Walker.NextWpt()	
+	return walkerNextWpt()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
