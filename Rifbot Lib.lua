@@ -329,13 +329,17 @@ end
 -->					@x - number position x on game client.
 -->					@y - number position y on game client.
 -->					@side - number 0 = left mouse, 1 = right mouse.
+-->					@background - boolean true or false use mouse in background mode (true) or real mouse move and click (false) !IMPORTANT x, y positions to click are related to monitor not game window since mouse is global.
 --> Return: 		boolean true or false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Rifbot.MouseClick(x, y, side)
+function Rifbot.MouseClick(x, y, side, background)
 	if side == nil then 
 		side = 0
 	end
-	return mouseClick(x, y, side)	 
+	if background == nil then
+		background = true
+	end	
+	return mouseClick(x, y, side, background)	 
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
