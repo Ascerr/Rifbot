@@ -44,10 +44,10 @@ NORTH = 0
 EAST = 1
 SOUTH = 2
 WEST = 3
-SOUTHWEST = 4
-SOUTHEAST = 5
-NORTHWEST = 6
-NORTHEAST = 7
+SOUTHEAST = 4
+SOUTHWEST = 5
+NORTHEAST = 6
+NORTHWEST = 7
 
 --> Containers index
 CONTAINER_BASEINDEX = contBaseIndex
@@ -322,7 +322,7 @@ function Rifbot.PressKey(key, delay)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Rifbot.MouseClick(x, y, side)
+--> Function:		Rifbot.MouseClick(x, y, side, background)
 --> Description: 	Click mouse to game client in background. 
 --> Class: 			Rifbot
 --> Params:
@@ -1632,7 +1632,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.UseItem(itemid, newIndex, delay)
---> Description: 	Use itemid with self character id.
+--> Description: 	Just use item.
 --> Class: 			Self
 --> Params:			
 -->					@itemid - number using item.
@@ -3314,6 +3314,25 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Targeting.setAttackRange(dist)
 	return targetingSetAttackRange(dist)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Targeting.setHppercRange(min, max)
+--> Description: 	Set new min and max hpperc for targeting to attack monsters.
+--> Class: 			Cavebot
+--> Params:			
+-->					@min - number minimal hpperc to attack
+ -->				@max - number maximal hpperc to attack
+--> Return: 		boolean true/false.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Targeting.setHppercRange(min, max)
+	if min == nil then
+		min = 0
+	end
+	if max == nil then
+		max = 100
+	end	
+	return targetingSetHppercRange(min, max)
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
