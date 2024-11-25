@@ -445,6 +445,17 @@ function Rifbot.setCheckboxState(section, checkbox, state)
 end	
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.GetInformationBoxMsg()
+--> Description: 	Get last message from Rifbot Information Box
+--> Class: 			Rifbot
+--> Params:			None
+--> Return: 		string message.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.GetInformationBoxMsg()
+	return getInformationBoxMsg()
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Rifbot.GetGroundPosUnderMouse()
 --> Description: 	Get ground position x, y, z under mouse cursor
 --> Class: 			Rifbot
