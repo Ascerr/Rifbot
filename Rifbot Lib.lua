@@ -70,7 +70,7 @@ PVP_FRIENDLY = 1
 SPEAK_SAY = 1
 SPEAK_WHISPER = 2
 SPEAK_YELL = 3
-SPEAK_NPC = 12 -- * not for all servers will works.
+SPEAK_NPC = speakNpcMode  -- this may change depend on server, default is 12. speakNpcMode will contains value depend on server where bot was launched (*not all servers implemented)
 
 --> Equipment slots
 SLOT_HEAD = 0
@@ -521,6 +521,18 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Rifbot.LoadSettings(name)
 	return loadSettings(name)
+end	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.setChangeGameWindowNameState(enabled)
+--> Description: 	Enable or disable changing game window name to character name by bot. 
+--> Class: 			Rifbot
+--> Params:			
+-->					@enabled - boolean true or false
+--> Return: 		nil - nothing		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.setChangeGameWindowNameState(enabled)
+	return setChangeGameWindowNameState(enabled)
 end	
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2421,7 +2433,7 @@ end
 --> Params:			
 -->					@x coordinate in the map on the x-axis
 -->					@y coordinate in the map on the y-axis
--->					@z coordinate in the map on the z-axis
+-->					@z coordinate in the map on the z-axis (only self.z)
 --> Return: 		table = {{id=?, count=?}, {id=?, count=?}	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Map.GetItems(x, y, z)
