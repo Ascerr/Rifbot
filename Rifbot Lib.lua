@@ -289,7 +289,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Rifbot.MemoryWrite(addr, value, retn)
---> Description: 	Write data to game clinet memory address.
+--> Description: 	Write data to game client memory address.
 --> Class: 			Rifbot
 --> Params:
 -->					@addr - number address in memory to read. Remeber to add base address returned by Rifbot.getClientInfo().base
@@ -1983,6 +1983,36 @@ function Self.ItemCount(itemid, container)
 	end
 	return amount							
 end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Self.LookItem(where, param1, param2, param3, param4)
+--> Description: 	Look in game on container/equipment/map item to display green message.
+--> Class: 			Self
+--> Params:			
+-->					@where string place to look: cont, eq, map
+-->					@param1 number containerNr or EquipmentSlot or position.x
+-->					@param2 number containerSlot or position.y or item.id
+-->					@param3 number item.id or position.z
+-->					@param4 number item.id
+-->
+-->					Usage:
+-->					Self.LookItem("cont", 0, 0, 3031) 			-- looks on container index: 0, slot: 0, item.id: 3031 - gold coin.
+-->					Self.LookItem("eq", SLOT_WEAPON, 3270) 		-- looks on equipment slot: SLOT_WEAPON(5), item.id: 3270 - club.
+-->					Self.LookItem("map", 32345, 32546, 7, 3499) -- looks on map ground posx: 32345, posy: 32546, posz: 7, item.id: 3499 - depot
+
+--> 
+--> Return: 		number item quantity.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Self.LookItem(where, param1, param2, param3, param4)
+	where = string.lower(where)
+	if not table.find({"cont", "eq", "map"}, where) then return end
+	if param1 == nil then param1 = -1 end
+	if param2 == nil then param2 = -1 end
+	if param3 == nil then param3 = -1 end
+	if param4 == nil then param4 = -1 end
+	return selfLookItem(where, param1, param2, param3, param4)
+end	
+
 
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
