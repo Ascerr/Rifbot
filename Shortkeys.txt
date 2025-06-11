@@ -8,7 +8,6 @@ amulet 2316		- Equip itemid to amulet slot.
 tuse 2268		- Use item with attacked creature.
 meuse 2273		- Use item with me.
 use 2789		- Use object id.
-withuse 2293		- Use item with crosshairs. [Not avaiable on otclient]
 turn 0			- Turn your character to the north [0=N, 1=E, 2=S, 3=W, 4=NE, 5=SE, 6=SW, 7=NW].
 step 0			- Step to direction [see above].
 uh Ben, 2273		- Use item id: 2273 on Player name: Ben.
