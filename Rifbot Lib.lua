@@ -44,9 +44,9 @@ NORTH = 0
 EAST = 1
 SOUTH = 2
 WEST = 3
-SOUTHEAST = 4
-SOUTHWEST = 5
-NORTHEAST = 6
+NORTHEAST = 4
+SOUTHEAST = 5
+SOUTHWEST = 6
 NORTHWEST = 7
 
 --> Containers index
@@ -326,8 +326,8 @@ end
 --> Description: 	Click mouse to game client in background. 
 --> Class: 			Rifbot
 --> Params:
--->					@x - number position x on game client.
--->					@y - number position y on game client.
+-->					@x - number position x in pixels on game client.
+-->					@y - number position y in pixels on game client.
 -->					@side - number 0 = left mouse, 1 = right mouse.
 -->					@background - boolean true or false use mouse in background mode (true) or real mouse move and click (false) !IMPORTANT x, y positions to click are related to monitor not game window since mouse is global.
 --> Return: 		boolean true or false.
@@ -347,10 +347,10 @@ end
 --> Description: 	Drag mouse from source to destination pos in background. 
 --> Class: 			Rifbot
 --> Params:
--->					@x1 - number position from x on game client.
--->					@y1 - number position from y on game client.
--->					@x2 - number position to x on game client.
--->					@y2 - number position to y on game client.
+-->					@x1 - number position from x in pixels on game client.
+-->					@y1 - number position from y in pixels on game client.
+-->					@x2 - number position to x in pixels on game client.
+-->					@y2 - number position to y in pixels on game client.
 --> Return: 		boolean true or false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Rifbot.MouseClickDrag(x1, y1, x2, y2)
@@ -1802,7 +1802,7 @@ end
 --> Return: 		boolean true or false
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Self.Step(direction)
-	if direction < NORTH or direction > NORTHEAST then
+	if direction < NORTH or direction > NORTHWEST then
 		direction = 0
 	end	
 	return selfStep(direction)
@@ -1902,7 +1902,7 @@ end
 function Self.setAttackType(mod)
 	if mod < ATTACK_TYPE_STAND or mod > ATTACK_TYPE_FOLLOW then
 		mod = 0
-	end	
+	end
 	return selfSetAttackType(mod)
 end
 
