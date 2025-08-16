@@ -900,15 +900,15 @@ function Self.Exp()
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Self.Capity()
+--> Function:		Self.Cap(), Self.Capacity(), Self.Capity()
 --> Description: 	Read self character capity.
 --> Class: 			Self
 --> Params:			None
 --> Return: 		number
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Self.Capity()
-	return selfCapity()	 
-end
+function Self.Cap() return selfCapity() end	
+function Self.Capacity() return selfCapity() end
+function Self.Capity() return selfCapity() end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Self.MagicLevel()
