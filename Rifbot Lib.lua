@@ -2367,7 +2367,7 @@ end
 --> Class: 			Creature
 --> Params:			
 -->					@creature table returned by Creature.getCreatures(special)
--->					@mode string type of reaching: "2sqm", "3sqm", "4sqm", "follow", "diagonal"
+-->					@mode string type of reaching: "2sqm", "3sqm", "4sqm", "follow", "diagonal", "diagonal 3sqm", "diagonal 4sqm"
 --> Return: 		boolean true or false
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Creature.Reach(creature, mode)
@@ -3481,6 +3481,7 @@ end
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VIP = {}
+NPC = {}
 Item = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3636,6 +3637,31 @@ function Item.hasAttribute(id, attr)
 	return itemHasAttribute(id, attr)
 end
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		NPC.TradeBuy(id, count)
+--> Description: 	Buy item id using NPC Trade panel, keep mind that this may not works on all servers. Trade panel must be open first.
+--> Class: 			Misc
+--> Params:			
+-->					@id - number item id.
+-->					@count - number item count to buy.
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function NPC.TradeBuy(id, count)
+	return npcTradeBuy(id, count)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		NPC.TradeSell(id, count)
+--> Description: 	Sell visible item id using NPC Trade panel, keep mind that this may not works on all servers. Trade panel must be open first.
+--> Class: 			Misc
+--> Params:			
+-->					@id - number item id.
+-->					@count - number item count to sell.
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function NPC.TradeSell(id, count)
+	return npcTradeSell(id, count)
+end
 
 --> Just replacing exisiting functions with new ones.
 function print(...) return printf(...) end	
