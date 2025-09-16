@@ -1,16 +1,14 @@
-All information about Rifbot available here: https://www.rifbot.eu/
+RIFBOT
 
-Below most known problems.
+------------------------------------------------
+Official website: https://www.rifbot.eu/
+------------------------------------------------
 
-1. Rifbot dissapear from folder short after run.
+Most known problem:
+---------------------------------------------------------------
+Windows Defender treat bot as malware and want block/remove it.
 
-Turn off Windows Defender or add exception with Rifbot.exe
-If not help then run as administrator rifbot_enabled.bat to disable services blocking Rifbot.
-
-2. Some functions doesn't work, example drink mana fluids.
-
-Run Rifbot as administrator or add this rights tou your Windows user account in control panel.
-
-3. Rifbot cannot patch automatically to new version.
-
-Download it manualy from rifbot.eu and replace only Rifbot.exe to keep your settings.  
+Possible solutions:
+---------------------------------------------------------------
+1. Run bot as admin -> options -> Add to WinDef exclusions
+2. Go Windows Defender -> Virus Settinngs -> Real Time Protection -> disable
