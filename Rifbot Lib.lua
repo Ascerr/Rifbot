@@ -116,7 +116,7 @@ SKULL_GREEN = 2
 SKULL_WHITE = 3
 SKULL_RED = 4
 
---> Fluids *Old tibia store fluids as one id and count is flag to "mana", "fluid" etc.
+--> Fluids *Old tibia store fluids as one id and count is flag to "mana", "life" etc.
 MANA_FLUID = manaFluidItem
 
 --> Friends.txt path
@@ -464,6 +464,20 @@ end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 function Rifbot.GetGroundPosUnderMouse()
 	return getGroundFromMouse()
+end	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Rifbot.GetMousePosFromGround()
+--> Description: 	Get mouse x, y pixels based on x, y visible map in game.
+--> Class: 			Rifbot
+--> Params:			None
+--> Return: 		table = {x = ?, y = ?}.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Rifbot.GetMousePosFromGround(x, y)
+	if x == nil or y == nil then 
+		return {x = 0, y = 0}
+	end	
+	return getMousePosFromGround(x, y)
 end	
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1989,7 +2003,7 @@ end
 --> Description: 	Look in game on container/equipment/map item to display green message.
 --> Class: 			Self
 --> Params:			
--->					@where string place to look: cont, eq, map
+-->					@where string place to look: "cont", "eq", "map"
 -->					@param1 number containerNr or EquipmentSlot or position.x
 -->					@param2 number containerSlot or position.y or item.id
 -->					@param3 number item.id or position.z
@@ -2397,52 +2411,6 @@ end
 Map = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Map.getArea(range)
---> Description: 	Get map with specific range. Warring! This function is take a lot of CPU. [#Outdated func works only Classic Tibia]
---> Class: 			Map
---> Params:			
--->					@range number map distance area
---> Return: 		table = {
--->						table = {x = ?, y = ?, z = ?, amount = ?, items = {{id = ?, count = ?}, {id = ?, count = ?}}}
--->						tableN = {x = ?, y = ?, z = ?, amount = ?, items = {{id = ?, count = ?}, {id = ?, count = ?}}}
--->					}						
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Map.getArea(range)
-	if range == nil then
-		range = 7
-	end	
-	return getMap(range)	
-end
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
---> Function:		Map.SquareContainsItem(square, itemid)
---> Description: 	Check map square for single item or table of items. [#Outdated func works only Classic Tibia]
---> Class: 			Map
---> Params:			
--->					@square table returned by Map.getArea(range)[x].items
--->					@itemid number id or table {id1, id2}
---> Return: 		boolean true or false		
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Map.SquareContainsItem(square, itemid)
-	if type(square) ~= "table" then
-		return false
-	end
-	local array = itemid
-	if type(itemid) ~= "table" then
-		array = {itemid}
-	end	
-	for i = 1, #square do
-		local item = square[i]
-		if type(item) == "table" then
-			if table.find(array, item.id) then
-				return true
-			end
-		end
-	end
-	return false				
-end
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Map.GetTopMoveItem(x, y, z)
 --> Description: 	Read tile on x, y, z for itemid and quantity.
 --> Class: 			Map
@@ -2479,7 +2447,7 @@ end
 -->					@y coordinate in the map on the y-axis
 -->					@z coordinate in the map on the z-axis
 -->					@itemid - number item id.
--->					@stack - number which stack on square to use. 1 or 2 should be top most item.
+-->					@stack - number which stack on square to use. 1 or 2 should be top most item. Bout should autodetect and use top item.
 -->					@delay - number execution delay (default math.random(350, 1200))
 --> Return: 		boolean true or false		
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2538,7 +2506,54 @@ function Map.UseItemWithGround(fromX, fromY, fromZ, toX, toY, toZ, delay)
 	end	
 	return mapUseItemWithGround(fromX, fromY, fromZ, toX, toY, toZ, delay)
 end
-	
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Map.getArea(range)
+--> Description: 	Get map with specific range. Warring! This function is take a lot of CPU. [#Outdated func works only Classic Tibia]
+--> Class: 			Map
+--> Params:			
+-->					@range number map distance area
+--> Return: 		table = {
+-->						table = {x = ?, y = ?, z = ?, amount = ?, items = {{id = ?, count = ?}, {id = ?, count = ?}}}
+-->						tableN = {x = ?, y = ?, z = ?, amount = ?, items = {{id = ?, count = ?}, {id = ?, count = ?}}}
+-->					}						
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Map.getArea(range)
+	if range == nil then
+		range = 7
+	end	
+	return getMap(range)	
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Map.SquareContainsItem(square, itemid)
+--> Description: 	Check map square for single item or table of items. [#Outdated func works only Classic Tibia]
+--> Class: 			Map
+--> Params:			
+-->					@square table returned by Map.getArea(range)[x].items
+-->					@itemid number id or table {id1, id2}
+--> Return: 		boolean true or false		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Map.SquareContainsItem(square, itemid)
+	if type(square) ~= "table" then
+		return false
+	end
+	local array = itemid
+	if type(itemid) ~= "table" then
+		array = {itemid}
+	end	
+	for i = 1, #square do
+		local item = square[i]
+		if type(item) == "table" then
+			if table.find(array, item.id) then
+				return true
+			end
+		end
+	end
+	return false				
+end
+
+
 --++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 --+
 --+					 .d8888b.                    888             d8b                                .d8888b.  888                            
