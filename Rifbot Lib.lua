@@ -659,6 +659,7 @@ function Module.New(name, moduleFunction, startOnCreate)
 		m._name = name
 		m._function = moduleFunction
 		m._active = startOnCreate
+		--print(m._name, m._active)
 		m._tempDelay = 0
 		table.insert(libModules, m)
 	else -- retrieving
@@ -673,6 +674,24 @@ function Module.New(name, moduleFunction, startOnCreate)
 end
 
 setmetatable(Module, {__call = function(_, ...) return Module.New(...) end})
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Module.getByName(name)
+--> Description: 	Get module metatable based on name
+--> Class: 			Module
+--> Params:
+-->					@name the name to identify the module as
+--> Return: 		metatable for module.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Module.getByName(name)
+	name = string.lower(name)
+	for i, mod in ipairs(libModules) do
+		if (string.lower(mod:Name()) == name) then
+			return mod
+		end
+	end
+	return false
+end	
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Module:Execute()
@@ -3128,7 +3147,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Proxy.New(name)
---> Description: 	Register function for callback proxy messages visibile as yellow and orange. Registering new function will replace current one.
+--> Description: 	Register function for callback proxy messages visibile as yellow and orange.
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
@@ -3143,7 +3162,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Proxy.TextNew(name)
---> Description: 	Register function for callback proxy messages visible as any other than yellow and orange. Registering new function will replace current one.
+--> Description: 	Register function for callback proxy messages visible as any other than yellow and orange.
 --> Class: 			Proxy
 --> Params:			
 -->					@name - string function name to register
@@ -3263,7 +3282,7 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		Walker.onLabel(name)
---> Description: 	Register function for callback label signals.
+--> Description: 	Register function for callback label signals. Function is one thread this means that can be used only once in single lua script.
 --> Class: 			Walker
 --> Params:			
 -->					@name - string function name to register
