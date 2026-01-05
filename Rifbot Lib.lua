@@ -351,10 +351,14 @@ end
 -->					@y1 - number position from y in pixels on game client.
 -->					@x2 - number position to x in pixels on game client.
 -->					@y2 - number position to y in pixels on game client.
+-->					@background - boolean true or false use mouse in background mode (true) or real mouse move and click (false) !IMPORTANT x, y positions to click are related to monitor not game window since mouse is global.
 --> Return: 		boolean true or false.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-function Rifbot.MouseClickDrag(x1, y1, x2, y2)
-	return mouseClickDrag(x1, y1, x2, y2)	 
+function Rifbot.MouseClickDrag(x1, y1, x2, y2, background)
+	if background == nil then
+		background = true
+	end	
+	return mouseClickDrag(x1, y1, x2, y2, background)	 
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -568,6 +572,9 @@ Module.__index = Module
 modulesRegistered = false
 Module.__routine = nil
 Module.__routineTime = 0
+WaitHandle = nil
+WaitTime = 0
+WaitDelay = 0
 
 --- This function should not be used by the regular user and is therefore not explained
 function libOnTimer()
