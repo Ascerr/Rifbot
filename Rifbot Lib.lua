@@ -3524,6 +3524,7 @@ end
 VIP = {}
 NPC = {}
 Item = {}
+Http = {}
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --> Function:		VIP.isOnline(name)
@@ -3703,6 +3704,57 @@ end
 function NPC.TradeSell(id, count)
 	return npcTradeSell(id, count)
 end
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Http.Open(method, url)
+--> Description: 	Open WinHttpRequest object to send message to server.
+--> Class: 			Misc
+--> Params:			
+-->					@method - string "GET" or "POST"
+-->					@url - string your url to website or server.
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Http.Open(method, url)
+	return httpOpen(method, url)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Http.SetRequestHeader(header, data)
+--> Description: 	Set header and their data for http object.
+--> Class: 			Misc
+--> Params:			
+-->					@header - string header name
+-->					@data - string header data text
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Http.SetRequestHeader(header, data)
+	return httpSetRequestHeader(header, data)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Http.Send(data)
+--> Description: 	Send data to previously opened http object.
+--> Class: 			Misc
+--> Params:			
+-->					@data - string data to send
+--> Return: 		boolean true or false.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Http.Send(data)
+	return httpSend(data)
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Function:		Http.Receive()
+--> Description: 	Receive data from previously opened http object and sended request. Call it in module to read incoming data.
+--> Class: 			Misc
+--> Params:			None
+--> Return: 		table = {status = ?, data = ?} on success status = 200, data contains received text message.		
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+function Http.Receive()
+	return httpReceive()
+end
+
 
 --> Just replacing exisiting functions with new ones.
 function print(...) return printf(...) end	
